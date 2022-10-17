@@ -1,9 +1,30 @@
-class Monitor {
+/*
+ * Abstract Class Product.
+ */
+class Product {
+
+  constructor() {
+    if (this.contructor == Product) {
+      throw new Error("Abstract classes can't be instantiated.");
+    }
+  }
+
+  productType () {
+    throw new Error("Method 'productType()' must be implemented.");
+  }
+}
+
+/**
+ * Monitor class
+ */
+
+class Monitor extends Product {
   brand; // Public
   _resolution; // Protected
   #display; // Private
 
   constructor(brand, resolution, display) {
+    super();
     this.brand = brand;
     this._resolution = resolution;
     this.#display = display;
@@ -79,6 +100,11 @@ class Monitor {
     }
   }
 
+  // Method from abstract Product class
+  productType () {
+    console.log("Monitor");
+  }
+
 
 }
 
@@ -94,3 +120,4 @@ console.log(newMonitor2.toString());
 
 console.log(newMonitor3);
 console.log(newMonitor3.toString());
+console.log(newMonitor3.productType());
