@@ -34,4 +34,21 @@ class Monitor {
   set changeDislay(newDislay) {
     this.#dislay = newDislay
   }
+
+  // Methods
+  toString() {
+    const jsonFormat = {
+      "properties": {
+        "brand": this.brand,
+        "resolution": this.resolution,
+        "display": this.#dislay
+      }
+    }
+    return jsonFormat;
+  }
+
+  
 }
+
+newMonitor = new Monitor("Asus", "1234*5678", "LCD");
+console.log(newMonitor.toString());
