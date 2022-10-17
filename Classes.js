@@ -35,16 +35,6 @@ class Product {
     throw new Error("Method 'productType()' must be implemented.");
   }
 
-  brandCompare(product1, product2) {
-    const jsonProduct1 = product1.toString();
-    const jsonProduct2 = product1.toString();
-
-    if (jsonProduct1.properties.brand == jsonProduct2.properties.brand) {
-      console.log("Similar brands");
-    } else {
-      console.log("Different brands");
-    }
-  }
 }
 
 /**
@@ -203,15 +193,23 @@ const newMonitor = Monitor.BrandAndResolution("Apple", "1920*1080");
 const newPhone = Phone.BrandAndResolutionAndPrice("Xiaomi", "450*560", 2000)
 
 
-console.log(newMonitor1);
-console.log(newMonitor1.toString());
+const brandCompare = (product1, product2) => {
+  const jsonProduct1 = product1.toString();
+  const jsonProduct2 = product2.toString();
 
-console.log(newMonitor2);
-console.log(newMonitor2.toString());
+  if (jsonProduct1.properties.brand == jsonProduct2.properties.brand) {
+    console.log("Similar brands");
+  } else {
+    console.log("Different brands");
+  }
+}
+brandCompare(newMonitor, newPhone);
 
-console.log(newMonitor3);
-console.log(newMonitor3.toString());
-console.log(newMonitor3.productType());
+
+
+
+console.log(newMonitor);
+console.log(newMonitor.productType());
 
 console.log(newPhone.toString());
 console.log(newPhone.brand);
