@@ -1,12 +1,25 @@
 class Monitor {
   brand; // Public
-  resolution; //Public
-  #dislay; //Private
+  _resolution; // Protected
+  #display; // Private
 
-  constructor(brand, resolution, dislay) {
+  constructor(brand, resolution, display) {
     this.brand = brand;
-    this.resolution = resolution
-    this.#dislay = dislay
+    this._resolution = resolution;
+    this.#display = display;
+  }
+
+  // Create static methods for different number of params
+  static Brand(brand) {
+    return new Monitor(brand, null, null);
+  }
+
+  static BrandAndResolution(brand, resolution) {
+    return new Monitor(brand, resolution, null);
+  }
+
+  static BrandAndResolutionAndDisplay(brand, resolution, display) {
+    return new Monitor(brand, resolution, display);
   }
 
   // Getters
@@ -15,11 +28,11 @@ class Monitor {
   }
 
   get resolution() {
-    return this.resolution
+    return this._resolution
   }
 
-  get dislay() {
-    return this.#dislay
+  get display() {
+    return this.#display
   }
 
   // Setters
@@ -28,27 +41,56 @@ class Monitor {
   }
 
   set changeResolution(newResolution) {
-    this.resolution = newResolution
+    this._resolution = newResolution
   }
 
-  set changeDislay(newDislay) {
-    this.#dislay = newDislay
+  set changeDisplay(newDisplay) {
+    this.#display = newDisplay
   }
 
   // Methods
   toString() {
-    const jsonFormat = {
-      "properties": {
-        "brand": this.brand,
-        "resolution": this.resolution,
-        "display": this.#dislay
+    if (!this._resolution && !this.#display) {
+      const jsonFormat = {
+        "properties": {
+          "brand": this.brand
+        }
       }
+      return jsonFormat;
+
+    } else if (!this.#display) {
+      const jsonFormat = {
+        "properties": {
+          "brand": this.brand,
+          "resolution": this._resolution
+        }
+      }
+      return jsonFormat;
+
+    } else {
+      const jsonFormat = {
+        "properties": {
+          "brand": this.brand,
+          "resolution": this._resolution,
+          "display": this.#display
+        }
+      }
+      return jsonFormat;
     }
-    return jsonFormat;
   }
 
-  
+
 }
 
-newMonitor = new Monitor("Asus", "1234*5678", "LCD");
-console.log(newMonitor.toString());
+const newMonitor1 = Monitor.Brand("Asus");
+const newMonitor2 = Monitor.BrandAndResolution("Apple", "1920*1080");
+const newMonitor3 = Monitor.BrandAndResolutionAndDisplay("LG", "1920*1080", "LCD");
+
+console.log(newMonitor1);
+console.log(newMonitor1.toString());
+
+console.log(newMonitor2);
+console.log(newMonitor2.toString());
+
+console.log(newMonitor3);
+console.log(newMonitor3.toString());
